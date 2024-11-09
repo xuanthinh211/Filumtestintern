@@ -1,0 +1,66 @@
+.welcome-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: #0b1a36;
+    color: white;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .welcome-title {
+    font-size: 14px;
+    color: #b0c4de;
+    margin-bottom: 50px;
+  }
+  
+  .welcome-question {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .welcome-description {
+    font-size: 14px;
+    color: #a9c1e1;
+    margin-bottom: 20px;
+  }
+  
+  .email-input {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #a9c1e1;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    background-color: #2d3f5c;
+    color: white;
+  }
+  
+  .start-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #0056b3;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .start-button:hover {
+    background-color: #004494;
+  }
+  .welcome-board{
+    background: #2d3f5c;
+    padding: 20px 20px;
+    border-radius: 14px;
+    width: 80%
+  }
+  .welcome-board .welcome-description{
+    text-align: left;
+  }

@@ -1,24 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import WelcomeScreen from "./components/WelcomeScreen";
+import GuideAnswer from "./components/GuideAnswer";
+import QuestionCard from "./components/QuestionCard";
+import data from "./data/assessment.json";
+
 
 function App() {
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+
+  const handleNext = () => {
+    if (currentQuestionIndex < data.questions.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+    }
+  };
+
+  const handlePrevious = () => {
+    if (currentQuestionIndex > 0) {
+      setCurrentQuestionIndex(currentQuestionIndex - 1);
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<WelcomeScreen />} />
+        <Route path="/GuideAnswer" element={<GuideAnswer/>} />
+        <Route
+          path="/questions"
+          element={
+            <QuestionCard
+              question={data.questions[currentQuestionIndex]}
+              currentQuestion={currentQuestionIndex + 1}
+              totalQuestions={data.questions.length}
+              onPrevious={handlePrevious}
+              onNext={handleNext}
+            />
+          }
+        />
+      </Routes>
+    </Router>
   );
 }
 
