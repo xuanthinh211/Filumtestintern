@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../styles/QuestionCard.css";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 function QuestionCard({ question, currentQuestion, totalQuestions, onPrevious, onNext }) {
   const [answers, setAnswers] = useState({});
@@ -18,7 +19,7 @@ function QuestionCard({ question, currentQuestion, totalQuestions, onPrevious, o
     });
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (currentQuestion === totalQuestions) {
       // Calculate total score
       const totalScore = Object.values(answers).reduce((acc, score) => acc + score, 0);
@@ -36,8 +37,15 @@ function QuestionCard({ question, currentQuestion, totalQuestions, onPrevious, o
         maturityLevel
       };
 
-      // Navigate to SpeedometerChart page with result
-      navigate("/SpeedometerChart", { state: result });
+      // Send result to server
+      try {
+        console.log('Sending result:', result); // Log result
+        await axios.post('http://localhost:5000/save-result', result);
+        console.log('Result sent successfully'); // Log success
+        navigate("/SpeedometerChart"); // Navigate to SpeedometerChart page
+      } catch (error) {
+        console.error('Error saving result:', error); // Log error
+      }
     } else {
       onNext();
     }
