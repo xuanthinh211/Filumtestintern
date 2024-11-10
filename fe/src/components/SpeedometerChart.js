@@ -102,24 +102,6 @@ const SpeedometerChart = () => {
     fetchResult();
   }, []);
 
-  useEffect(() => {
-    window.fbAsyncInit = function() {
-      FB.init({
-        appId: 'your-app-id', // Thay thế bằng Facebook App ID của bạn
-        autoLogAppEvents: true,
-        xfbml: true,
-        version: 'v14.0' // Đảm bảo phiên bản này khớp với phiên bản bạn đang sử dụng
-      });
-    };
-    (function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) { return; }
-      js = d.createElement(s); js.id = id;
-      js.src = "https://connect.facebook.net/en_US/sdk.js";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-  }, []);
-
   const handleShare = () => {
     setShowShareModal(true);
   };
@@ -174,8 +156,7 @@ const SpeedometerChart = () => {
   const handleFacebookShare = () => {
     const { maturityLevel } = result;
     const imageUrl = images[maturityLevel];
-    const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}&quote=
-    ${encodeURIComponent('Check out my maturity level!')}&picture=${encodeURIComponent(window.location.origin + imageUrl)}`;
+    const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}&quote=${encodeURIComponent('Check out my maturity level!')}&picture=${encodeURIComponent(window.location.origin + imageUrl)}`;
 
     window.open(shareUrl, '_blank', 'width=600,height=400');
   };
