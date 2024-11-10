@@ -13,8 +13,10 @@ app.use(cors({
 app.use(express.json());
 
 // Routes
-app.get('/', (req, res) => {
-  res.send('Welcome to the server!');
+app.post('/api/save-result', (req, res) => {
+  const result = req.body;
+  console.log('Result received:', result);
+  res.status(200).send('Result saved successfully');
 });
 
 // Start the server

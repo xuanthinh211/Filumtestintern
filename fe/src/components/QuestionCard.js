@@ -45,7 +45,7 @@ function QuestionCard({ question, currentQuestion, totalQuestions, onPrevious, o
       // Send result to server
       try {
         console.log('Sending result:', result); // Log result
-        await axios.post('http://localhost:5000/save-result', result);
+        await axios.post(`${process.env.REACT_APP_API_URL}/save-result`, result);
         console.log('Result sent successfully'); // Log success
         navigate("/SpeedometerChart"); // Navigate to SpeedometerChart page
       } catch (error) {
