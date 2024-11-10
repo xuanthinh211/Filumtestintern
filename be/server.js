@@ -1,39 +1,19 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const cors = require('cors');
-const fs = require('fs');
-const path = require('path');
 
 const app = express();
-const PORT = 5000;
+const port = process.env.PORT || 3000;
 
-app.use(bodyParser.json());
-app.use(cors()); // Sử dụng cors middleware
+// Middleware
+app.use(cors());
+app.use(express.json());
 
-app.post('/save-result', (req, res) => {
-  console.log('Received request:', req.body); // Log request body
-  const result = req.body;
-  const filePath = path.join(__dirname, 'result.json');
-
-  fs.writeFile(filePath, JSON.stringify(result, null, 2), (err) => {
-    if (err) {
-      console.error('Error saving file:', err); // Log error
-      return res.status(500).json({ message: 'Error saving file' });
-    }
-    console.log('File saved successfully'); // Log success
-    res.status(200).json({ message: 'File saved successfully' });
-  });
+// Routes
+app.get('/', (req, res) => {
+  res.send('Welcome to the server!');
 });
 
-app.get('/result.json', (req, res) => {
-  const filePath = path.join(__dirname, 'result.json');
-  if (fs.existsSync(filePath)) {
-    res.sendFile(filePath);
-  } else {
-    res.status(404).json({ message: 'File not found' });
-  }
-});
-
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+// Start the server
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
