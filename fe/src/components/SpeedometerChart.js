@@ -224,7 +224,7 @@ const SpeedometerChart = () => {
                   placeholder="Địa chỉ email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className='email-input'
+                  className='email-input-share'
                 />
                 <div className='modal-buttons'>
                   <button className='modal-button' onClick={() => setShowEmailForm(false)}>Quay lại</button>
