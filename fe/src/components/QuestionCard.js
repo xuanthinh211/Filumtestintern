@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "../styles/QuestionCard.css";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios';
 
 function QuestionCard({ question, currentQuestion, totalQuestions, onPrevious, onNext }) {
   const [answers, setAnswers] = useState({});
@@ -19,7 +18,7 @@ function QuestionCard({ question, currentQuestion, totalQuestions, onPrevious, o
     });
   };
 
-  const handleNext = async () => {
+  const handleNext = () => {
     if (currentQuestion === totalQuestions) {
       // Calculate total score
       const totalScore = Object.values(answers).reduce((acc, score) => acc + score, 0);
