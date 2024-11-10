@@ -18,7 +18,7 @@
   }
   
   .welcome-question {
-    font-size: 20px;
+    font-size: 40px;
     font-weight: bold;
     margin-bottom: 10px;
   }
@@ -37,8 +37,8 @@
     border: 1px solid #a9c1e1;
     border-radius: 5px;
     margin-bottom: 20px;
-    background-color: #2d3f5c;
-    color: white;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
   }
   
   .start-button {
