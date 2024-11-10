@@ -148,6 +148,10 @@ const SpeedometerChart = () => {
   };
 
   const handleSendEmail = () => {
+    if (emails.length === 0) {
+      alert('Vui lòng nhập ít nhất một địa chỉ email trước khi gửi.');
+      return;
+    }
     alert(`Emails đã được gửi đến: ${emails.join(', ')}`);
     setShowEmailForm(false);
     setShowShareModal(false);
