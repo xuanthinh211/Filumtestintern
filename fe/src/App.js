@@ -6,7 +6,7 @@ import QuestionCard from "./components/QuestionCard";
 import data from "./data/assessment.json";
 import SpeedometerChart from './components/SpeedometerChart';
 
-
+const apiUrl = process.env.REACT_APP_API_URL || 'https://filumtestintern.onrender.com/api';
 
 function App() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
