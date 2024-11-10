@@ -105,10 +105,10 @@ const SpeedometerChart = () => {
   useEffect(() => {
     window.fbAsyncInit = function() {
       FB.init({
-        appId: 'your-app-id', // Replace with your Facebook app ID
+        appId: 'your-app-id', // Thay thế bằng Facebook App ID của bạn
         autoLogAppEvents: true,
         xfbml: true,
-        version: 'v14.0' // Ensure this matches the version you are using
+        version: 'v14.0' // Đảm bảo phiên bản này khớp với phiên bản bạn đang sử dụng
       });
     };
     (function(d, s, id) {
@@ -176,10 +176,10 @@ const SpeedometerChart = () => {
     const imageUrl = images[maturityLevel];
     FB.ui({
       method: 'share',
-      href: 'http://localhost:3000', // Replace with your localhost URL
+      href: window.location.href, // URL của trang bạn muốn chia sẻ
       hashtag: '#YourHashtag',
       quote: 'Check out my maturity level!',
-      picture: `http://localhost:3000${imageUrl}` // Replace with the correct path to your images
+      picture: `${window.location.origin}${imageUrl}` // Đường dẫn đầy đủ đến hình ảnh
     }, function(response){});
   };
 
@@ -239,7 +239,6 @@ const SpeedometerChart = () => {
         <button className='action-button' onClick={handleDownload}>Download</button>
         <button className='action-button' onClick={handleReload}>Reload</button>
       </div>
-
       {showShareModal && (
         <div className='modal'>
           <div className='modal-content'>
