@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import "../styles/QuestionCard.css";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 function QuestionCard({ question, currentQuestion, totalQuestions, onPrevious, onNext }) {
   const [answers, setAnswers] = useState({});
+  const [selectedOptions, setSelectedOptions] = useState({});
   const navigate = useNavigate();
 
   const handleOptionClick = (option) => {
@@ -11,9 +13,13 @@ function QuestionCard({ question, currentQuestion, totalQuestions, onPrevious, o
       ...answers,
       [currentQuestion]: option.score
     });
+    setSelectedOptions({
+      ...selectedOptions,
+      [currentQuestion]: option.text
+    });
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (currentQuestion === totalQuestions) {
       // Calculate total score
       const totalScore = Object.values(answers).reduce((acc, score) => acc + score, 0);
@@ -31,19 +37,15 @@ function QuestionCard({ question, currentQuestion, totalQuestions, onPrevious, o
         maturityLevel
       };
 
-      // Convert result to JSON and create a blob
-      const resultJson = JSON.stringify(result, null, 2);
-      const blob = new Blob([resultJson], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-
-      // Create a link to download the file
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'result.json';
-      a.click();
-
-      // Navigate to results page or show results
-      navigate("/results");
+      // Send result to server
+      try {
+        console.log('Sending result:', result); // Log result
+        await axios.post('http://localhost:5000/save-result', result);
+        console.log('Result sent successfully'); // Log success
+        navigate("/SpeedometerChart"); // Navigate to SpeedometerChart page
+      } catch (error) {
+        console.error('Error saving result:', error); // Log error
+      }
     } else {
       onNext();
     }
@@ -63,7 +65,7 @@ function QuestionCard({ question, currentQuestion, totalQuestions, onPrevious, o
           {question.options.map((option, index) => (
             <button
               key={index}
-              className="option-button"
+              className={`option-button ${selectedOptions[currentQuestion] === option.text ? 'selected' : ''}`}
               onClick={() => handleOptionClick(option)}
             >
               {option.text}
@@ -78,7 +80,9 @@ function QuestionCard({ question, currentQuestion, totalQuestions, onPrevious, o
         ) : (
           <button className="nav-button back-button" onClick={onPrevious}>Quay lại</button>
         )}
-        <button className="nav-button next-button" onClick={handleNext}>Tiếp theo</button>
+        <button className="nav-button next-button" onClick={handleNext}>
+          {currentQuestion === totalQuestions ? "Hoàn thành" : "Tiếp theo"}
+        </button>
       </div>
     </div>
   );

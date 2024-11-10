@@ -4,7 +4,8 @@ import WelcomeScreen from "./components/WelcomeScreen";
 import GuideAnswer from "./components/GuideAnswer";
 import QuestionCard from "./components/QuestionCard";
 import data from "./data/assessment.json";
-import SpeedometerChart from "./components/SpeedometerChart"; // Import SpeedometerChart
+import SpeedometerChart from './components/SpeedometerChart';
+
 
 
 function App() {
@@ -27,7 +28,7 @@ function App() {
       <Routes>
         <Route path="/" element={<WelcomeScreen />} />
         <Route path="/GuideAnswer" element={<GuideAnswer/>} />
-        <Route path="/speedometer" element={<SpeedometerChart />} /> {/* Route riêng cho SpeedometerChart */}
+        <Route path="/SpeedometerChart" element={<SpeedometerChart />} />
 
         <Route
           path="/questions"
@@ -35,7 +36,7 @@ function App() {
             <QuestionCard
               question={data.questions[currentQuestionIndex]}
               currentQuestion={currentQuestionIndex + 1}
-              totalQuestions={data.questions.length}
+              totalQuestions={10}
               onPrevious={handlePrevious}
               onNext={handleNext}
             />

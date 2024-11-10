@@ -1,0 +1,111 @@
+.question-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;  /* Chiếm toàn bộ chiều cao màn hình */
+  width: 100vw;   /* Chiếm toàn bộ chiều rộng màn hình */
+  background-color: #0b1a36;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box; /* Đảm bảo padding không làm thay đổi kích thước */
+}
+
+.title {
+  font-size: 14px;
+  color: #b0c4de;
+  margin-bottom: 20px;
+}
+
+.question-content {
+  background-color: #2D3F5C;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+}
+
+.question-number {
+  font-size: 12px;
+  color: #A9C1E1;
+  margin-bottom: 10px;
+}
+
+.question-text {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.option-button {
+  padding: 10px;
+  font-size: 14px;
+  color: #ffffff;
+  background-color: #334B6A;
+  border: 1px solid #A9C1E1;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.option-button:hover {
+  background-color: #3E5983;
+}
+
+.option-button.selected {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.nav-button {
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.back-button {
+  background-color: #4A607B;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.next-button {
+  background-color: #0056b3;
+  color: white;
+  border: none;
+}
+
+.nav-button:hover {
+  opacity: 0.9;
+}
+
+.home-back-button {
+  background-color: #4A607B;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.home-back-button:hover {
+  opacity: 0.9;
+}
