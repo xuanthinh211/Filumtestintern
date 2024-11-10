@@ -92,7 +92,7 @@ const SpeedometerChart = () => {
   useEffect(() => {
     const fetchResult = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/result.json');
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/result.json`);
         setResult(response.data);
       } catch (error) {
         console.error('Error fetching result:', error);
@@ -111,7 +111,6 @@ const SpeedometerChart = () => {
         version: 'v14.0' // Ensure this matches the version you are using
       });
     };
-
     (function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) { return; }
@@ -175,7 +174,6 @@ const SpeedometerChart = () => {
   const handleFacebookShare = () => {
     const { maturityLevel } = result;
     const imageUrl = images[maturityLevel];
-
     FB.ui({
       method: 'share',
       href: 'http://localhost:3000', // Replace with your localhost URL
