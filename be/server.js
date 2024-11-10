@@ -1,5 +1,7 @@
 const express = require('express');
 const cors = require('cors');
+const fs = require('fs');
+const path = require('path');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -20,15 +22,27 @@ app.get('/', (req, res) => {
 app.post('/api/save-result', (req, res) => {
   const result = req.body;
   console.log('Result received:', result);
-  res.status(200).send('Result saved successfully');
+
+  // Lưu kết quả vào file result.json
+  const filePath = path.join(__dirname, 'result.json');
+  fs.writeFile(filePath, JSON.stringify(result, null, 2), (err) => {
+    if (err) {
+      console.error('Error saving result:', err);
+      return res.status(500).send('Error saving result');
+    }
+    res.status(200).send('Result saved successfully');
+  });
 });
 
 app.get('/api/result.json', (req, res) => {
-  const result = {
-    totalScore: 1,
-    maturityLevel: 'Sơ khai'
-  };
-  res.json(result);
+  const filePath = path.join(__dirname, 'result.json');
+  fs.readFile(filePath, 'utf8', (err, data) => {
+    if (err) {
+      console.error('Error reading result:', err);
+      return res.status(500).send('Error reading result');
+    }
+    res.json(JSON.parse(data));
+  });
 });
 
 // Start the server
