@@ -86,7 +86,8 @@ const SpeedometerChart = () => {
   const [result, setResult] = useState(null);
   const [showShareModal, setShowShareModal] = useState(false);
   const [showEmailForm, setShowEmailForm] = useState(false);
-  const [email, setEmail] = useState('');
+  const [emails, setEmails] = useState([]);
+  const [copyButtonText, setCopyButtonText] = useState('Sao chép đường dẫn liên kết');
 
   useEffect(() => {
     const fetchResult = async () => {
@@ -157,8 +158,12 @@ const SpeedometerChart = () => {
     setShowEmailForm(true);
   };
 
+  const handleAddEmail = (newEmail) => {
+    setEmails([...emails, newEmail]);
+  };
+
   const handleSendEmail = () => {
-    alert(`Email đã được gửi đến: ${email}`);
+    alert(`Emails đã được gửi đến: ${emails.join(', ')}`);
     setShowEmailForm(false);
     setShowShareModal(false);
   };
@@ -174,6 +179,15 @@ const SpeedometerChart = () => {
       quote: 'Check out my maturity level!',
       picture: `http://localhost:3000${imageUrl}` // Replace with the correct path to your images
     }, function(response){});
+  };
+
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText(window.location.href)
+      .then(() => {
+        setCopyButtonText('Đã sao chép');
+        setTimeout(() => setCopyButtonText('Sao chép đường dẫn liên kết'), 2000); // Reset after 2 seconds
+      })
+      .catch(err => console.error('Failed to copy: ', err));
   };
 
   if (!result) {
@@ -214,8 +228,8 @@ const SpeedometerChart = () => {
           maxValue={10}
           segments={5}
           segmentColors={['#d9534f', '#f0ad4e', '#5bc0de', '#5cb85c', '#337ab7']}
-          needleColor="black"
-          textColor="black"
+          needleColor="red"
+          textColor="white"
         />
       </div>
       <div className='button-container'>
@@ -230,12 +244,22 @@ const SpeedometerChart = () => {
             {showEmailForm ? (
               <>
                 <h3>Vui lòng cung cấp địa chỉ qua email mà bạn muốn chia sẻ kết quả:</h3>
+                <ul className='email-list'>
+                  {emails.map((email, index) => (
+                    <li key={index}>{email}</li>
+                  ))}
+                </ul>
                 <input
                   type="email"
                   placeholder="Địa chỉ email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      handleAddEmail(e.target.value);
+                      e.target.value = ''; // Clear input after adding
+                    }
+                  }}
                   className='email-input-share'
+                  style={{ height: `${Math.max(40, emails.length * 20)}px` }} // Adjust height based on number of emails
                 />
                 <div className='modal-buttons'>
                   <button className='modal-button' onClick={() => setShowEmailForm(false)}>Quay lại</button>
@@ -247,7 +271,7 @@ const SpeedometerChart = () => {
                 <h3>Đây là một số cách bạn có thể chia sẻ với bạn bè và đồng nghiệp của mình:</h3>
                 <button className='modal-button' onClick={handleFacebookShare}>Chia sẻ qua Facebook</button>
                 <button className='modal-button' onClick={handleEmailShare}>Chia sẻ qua Email</button>
-                <button className='modal-button'>Sao chép đường dẫn liên kết</button>
+                <button className='modal-button' onClick={handleCopyLink}>{copyButtonText}</button>
                 <button className='modal-button' onClick={handleCloseModal}>Huỷ</button>
               </>
             )}

@@ -19,7 +19,7 @@
 }
 .chart-desc{
     text-align: left;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 .chart-result-name{
     text-align: center;
@@ -110,4 +110,24 @@
   .modal-buttons {
     display: flex;
     justify-content: space-between;
+  }
+
+  .email-list {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 10px;
+  }
+
+  .email-list li {
+    background-color: #f0f0f0;
+    margin-bottom: 5px;
+    padding: 5px;
+    border-radius: 3px;
+  }
+
+  .email-input-share {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    margin-bottom: 10px;
   }
