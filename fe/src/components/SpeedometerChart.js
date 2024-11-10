@@ -162,6 +162,10 @@ const SpeedometerChart = () => {
     setEmails([...emails, newEmail]);
   };
 
+  const handleDeleteEmail = (index) => {
+    setEmails(emails.filter((_, i) => i !== index));
+  };
+
   const handleSendEmail = () => {
     alert(`Emails đã được gửi đến: ${emails.join(', ')}`);
     setShowEmailForm(false);
@@ -246,7 +250,10 @@ const SpeedometerChart = () => {
                 <h3>Vui lòng cung cấp địa chỉ qua email mà bạn muốn chia sẻ kết quả:</h3>
                 <ul className='email-list'>
                   {emails.map((email, index) => (
-                    <li key={index}>{email}</li>
+                    <li key={index} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <span>{email}</span>
+                      <button onClick={() => handleDeleteEmail(index)}>Xóa</button>
+                    </li>
                   ))}
                 </ul>
                 <input
@@ -259,7 +266,7 @@ const SpeedometerChart = () => {
                     }
                   }}
                   className='email-input-share'
-                  style={{ height: `${Math.max(40, emails.length * 20)}px` }} // Adjust height based on number of emails
+                  style={{ height: `20%` }} // Adjust height based on number of emails
                 />
                 <div className='modal-buttons'>
                   <button className='modal-button' onClick={() => setShowEmailForm(false)}>Quay lại</button>
