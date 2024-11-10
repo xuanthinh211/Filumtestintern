@@ -174,13 +174,10 @@ const SpeedometerChart = () => {
   const handleFacebookShare = () => {
     const { maturityLevel } = result;
     const imageUrl = images[maturityLevel];
-    FB.ui({
-      method: 'share',
-      href: window.location.href, // URL của trang bạn muốn chia sẻ
-      hashtag: '#YourHashtag',
-      quote: 'Check out my maturity level!',
-      picture: `${window.location.origin}${imageUrl}` // Đường dẫn đầy đủ đến hình ảnh
-    }, function(response){});
+    const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}&quote=
+    ${encodeURIComponent('Check out my maturity level!')}&picture=${encodeURIComponent(window.location.origin + imageUrl)}`;
+
+    window.open(shareUrl, '_blank', 'width=600,height=400');
   };
 
   const handleCopyLink = () => {
