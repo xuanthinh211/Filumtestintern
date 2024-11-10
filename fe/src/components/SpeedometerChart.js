@@ -52,7 +52,7 @@ const levels = [
     range: [6, 8],
     description: "Năng lực Lắng nghe khách hàng hoạt động đầy đủ trên một nền tảng duy nhất với quy định về trách nhiệm và thực thi rõ ràng. Các quy trình làm việc, báo cáo và phân tích được thông báo đầy đủ và tường minh, cung cấp dữ liệu thời gian thực, phù hợp cho từng nhân viên và phòng ban. Thông tin về phản hồi được tích hợp vào các ứng dụng quan trọng và phổ biến như CRM.",
     key_actions: [
-      "Ứng dụng công nghệ tự động dựa trên dữ liệu lớn và AI giúp phân tích và đưa ra hành động khuyến nghị từ phản hồi khách hàng.",
+      "Ứng dụng công nghệ tự động dựa trên dữ liệu lớn và AI giúp phân tch và đưa ra hành động khuyến nghị từ phản hồi khách hàng.",
       "Định lượng giá trị của Lắng nghe khách hàng thông qua kết nối các hành động khuyến nghị và kết quả thu được lên các chỉ số liên quan đến vận hành và khách hàng.",
       "Xây dựng cơ chế cho việc thu thập ý kiến phản hồi từ nhân viên nhằm cải thiện trải nghiệm khách hàng.",
       "Tổ chức đều đặn các hoạt động khuyến khích nhân viên tham gia đóng góp ý kiến để cải thiện trải nghiệm khách hàng."
@@ -76,10 +76,10 @@ const levels = [
 
 const images = {
   "Sơ khai": "/thumbnails/level_1.png",
-  "Phát triển": "/thumbnails/level_2.png",
-  "Trưởng thành": "/thumbnails/level_3.png",
-  "Chuyên nghiệp": "/thumbnails/level_4.png",
-  "Xuất sắc": "/thumbnails/level_5.png"
+  "Thành lập": "/thumbnails/level_2.png",
+  "Vận hành": "/thumbnails/level_3.png",
+  "Tối ưu": "/thumbnails/level_4.png",
+  "Thấm nhuần": "/thumbnails/level_5.png"
 };
 
 const SpeedometerChart = () => {
@@ -124,13 +124,24 @@ const SpeedometerChart = () => {
     setShowShareModal(true);
   };
 
+  const levelMapping = {
+    "Sơ khai": 1,
+    "Thành lập": 2,
+    "Vận hành": 3,
+    "Tối ưu": 4,
+    "Thấm nhuần": 5
+  };
+
   const handleDownload = () => {
+    const { maturityLevel } = result;
+    const levelNumber = levelMapping[maturityLevel];
+    const imageUrl = images[maturityLevel];
     const element = document.createElement("a");
-    const file = new Blob([JSON.stringify(result, null, 2)], { type: 'application/json' });
-    element.href = URL.createObjectURL(file);
-    element.download = "result.json";
+    element.href = imageUrl;
+    element.download = `level_${levelNumber}.png`;
     document.body.appendChild(element);
     element.click();
+    document.body.removeChild(element);
   };
 
   const handleReload = () => {

@@ -20,6 +20,11 @@ function QuestionCard({ question, currentQuestion, totalQuestions, onPrevious, o
   };
 
   const handleNext = async () => {
+    if (!selectedOptions[currentQuestion]) {
+      alert("Please select an option before proceeding.");
+      return;
+    }
+
     if (currentQuestion === totalQuestions) {
       // Calculate total score
       const totalScore = Object.values(answers).reduce((acc, score) => acc + score, 0);
