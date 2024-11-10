@@ -40,7 +40,7 @@ function QuestionCard({ question, currentQuestion, totalQuestions, onPrevious, o
       // Send result to server
       try {
         console.log('Sending result:', result); // Log result
-        await axios.post('https://filumtestinternbe.onrender.com/save-result', result);
+        await axios.post('https://filumtestinternbe.vercel.app/save-result', result);
         console.log('Result sent successfully'); // Log success
         navigate("/SpeedometerChart"); // Navigate to SpeedometerChart page
       } catch (error) {

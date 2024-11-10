@@ -18,7 +18,7 @@ const SpeedometerChart = () => {
   useEffect(() => {
     const fetchResult = async () => {
       try {
-        const response = await axios.get('https://filumtestinternbe.onrender.com/result.json');
+        const response = await axios.get('https://filumtestinternbe.vercel.app/result.json');
         console.log('Fetched result:', response.data); // Log dữ liệu nhận được
         setResult(response.data);
       } catch (error) {
